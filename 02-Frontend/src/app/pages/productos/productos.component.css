@@ -54,3 +54,36 @@
   margin-top: 0;
   margin-bottom: 1rem;
 }
+
+
+.card-mobile {
+    background-color: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    transition: transform 0.2s ease;
+}
+
+.card-mobile:active {
+    transform: scale(0.98);
+}
+
+.x-small {
+    font-size: 0.75rem;
+}
+
+/* Ajuste responsivo para el encabezado */
+@media (max-width: 768px) {
+    .page-container {
+        padding: 1rem !important;
+    }
+    
+    .inventory-header h2 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Asegurar que los indicadores de score se vean bien en móvil */
+.score-indicator {
+    min-width: 32px;
+    min-height: 32px;
+}

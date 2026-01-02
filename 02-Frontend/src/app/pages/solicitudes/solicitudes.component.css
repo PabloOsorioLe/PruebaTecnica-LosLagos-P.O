@@ -1,0 +1,41 @@
+.card-solicitud {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    max-width: 650px;
+    margin: 0 auto;
+}
+
+.form-label {
+    color: #475569;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.form-control, .form-select {
+    border: 1px solid #e2e8f0;
+    padding: 0.6rem 0.8rem;
+    border-radius: 8px;
+}
+
+.form-control:focus {
+    border-color: #1e293b;
+    box-shadow: 0 0 0 2px rgba(30, 41, 59, 0.1);
+}
+
+.btn-primary {
+    background-color: #1e293b;
+    border: none;
+    font-weight: 600;
+}
+
+.table-solicitudes {
+    font-size: 0.85rem;
+}
+
+.badge-status {
+    padding: 0.4em 0.8em;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
