@@ -1,0 +1,54 @@
+<div class="page-container animate-fade">
+  
+  <div class="inventory-header d-flex justify-content-between align-items-end mb-4">
+    <div>
+      <h2 class="text-slate fw-bold mb-1">Inventario de Productos</h2>
+  
+    </div>
+
+  </div>
+
+  <div class="card border-0 shadow-sm overflow-hidden">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th class="ps-4">ID</th>
+            <th>Detalle del Producto</th>
+            <th>Categoría</th>
+            <th>Precio Unit.</th>
+            <th class="text-center">Eco-Score</th>
+            <th class="text-center pe-4">Sostenible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of listaProductos">
+            <td class="ps-4 text-secondary small">#{{ p.id }}</td>
+            <td>
+              <div class="product-info">
+                <span class="d-block fw-semibold text-slate">{{ p.name }}</span>
+                <code class="text-muted x-small" style="font-size: 0.7rem;">{{ p.barcode }}</code>
+              </div>
+            </td>
+            <td>
+              <span class="badge badge-category">{{ p.category }}</span>
+            </td>
+            <td class="fw-bold text-slate">
+              ${{ p.price | number:'1.0-0' }}
+            </td>
+            <td class="text-center">
+              <span class="score-indicator" [style.background-color]="getColorImpacto(p.environmentalImpact)">
+                {{ p.environmentalImpact }}
+              </span>
+            </td>
+            <td class="text-center pe-4">
+              <i class="bi bi-check-circle-fill fs-5" 
+                 [class.text-success]="p.isSustainable" 
+                 [class.text-light-gray]="!p.isSustainable"></i>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

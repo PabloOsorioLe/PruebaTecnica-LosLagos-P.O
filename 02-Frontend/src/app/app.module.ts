@@ -32,10 +32,17 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // Otros
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component';
+import { ScannerComponent } from './pages/scanner/scanner.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    SolicitudesComponent,
+    ScannerComponent,
+    ProductosComponent
     // NO declarar aquí componentes standalone
     // NO declarar MantenedorProductosComponent
   ],
@@ -68,12 +75,16 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 
     // 5. Librerías externas
     FlatpickrModule.forRoot(),
-
+   
     // 6. PWA
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       registrationStrategy: 'registerWhenStable:30000',
     }),
+
+     // 7. Libreria scaner
+    ZXingScannerModule,
+ 
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'es-CL' }

@@ -1,6 +1,6 @@
 {
-  "name": "SupplyConnect",
-  "short_name": "SupplyConnect",
+  "name": "GrupoLagos",
+  "short_name": "GrupoLagos",
   "theme_color": "#1976d2",
   "background_color": "#fafafa",
   "display": "standalone",
@@ -10,49 +10,49 @@
   "lang": "es",
   "icons": [
     {
-      "src": "assets/icons/IconoSupplyConnect-72x72.png",
+      "src": "assets/icons/Icono-72x72.png",
       "sizes": "72x72",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-96x96.png",
+      "src": "assets/icons/Icono-96x96.png",
       "sizes": "96x96",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-128x128.png",
+      "src": "assets/icons/Icono-128x128.png",
       "sizes": "128x128",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-144x144.png",
+      "src": "assets/icons/Icono-144x144.png",
       "sizes": "144x144",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-152x152.png",
+      "src": "assets/icons/Icono-152x152.png",
       "sizes": "152x152",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-192x192.png",
+      "src": "assets/icons/Icono-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-384x384.png",
+      "src": "assets/icons/Icono-384x384.png",
       "sizes": "384x384",
       "type": "image/png",
       "purpose": "maskable any"
     },
     {
-      "src": "assets/icons/IconoSupplyConnect-512x512.png",
+      "src": "assets/icons/Icono-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable any"

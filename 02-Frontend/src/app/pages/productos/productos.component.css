@@ -1,0 +1,56 @@
+/* Contenedor principal ajustado para ser compacto */
+.page-container {
+  /* Reducimos el padding superior de 2rem a 1rem */
+  padding: 1rem 1.5rem 1.5rem 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.text-slate { color: #1e293b; }
+.text-light-gray { color: #e2e8f0; }
+
+/* Estilos de Tabla */
+.table thead th {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.8rem 0.5rem; /* Tabla más compacta */
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.table tbody td {
+  padding: 0.8rem 0.5rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+/* Badge de Categoría */
+.badge-category {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 500;
+  padding: 0.3rem 0.7rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+}
+
+/* Indicador de Eco-Score (Círculo sólido) */
+.score-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  color: white;
+  font-weight: bold;
+  font-size: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Ajuste del encabezado para eliminar espacios extra */
+.inventory-header {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}

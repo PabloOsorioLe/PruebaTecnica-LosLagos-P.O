@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Router } from '@angular/router';
-
-// CORRECCIÓN 1: Apuntamos a la carpeta correcta 'models' y al archivo '.model'
 import { Usuario } from '../models/usuario.model';
 
 @Injectable({
@@ -21,19 +19,26 @@ export class AuthService {
 
   iniciarSesion(usuario: Usuario) {
     sessionStorage.setItem('usuarioActual', JSON.stringify(usuario));
+    // El token '12345' ya lo guardamos en el componente, 
+    // pero aquí centralizamos la sesión del usuario.
     this.usuarioActualSubject.next(usuario);
-    console.log('AuthService -> usuarioActualSubject emitido', usuario);
   }
 
-  // CORRECCIÓN 2: Renombrado a 'logout' para que coincida con el Navbar
-  logout() {
-    sessionStorage.removeItem('usuarioActual');
-    sessionStorage.removeItem('token');
+  // CAMBIO CLAVE: Renombramos para que el Navbar no dé error
+  cerrarSesion() {
+    // 1. Limpiamos TODA la sesión (usuario y token)
+    sessionStorage.clear();
+    
+    // 2. Notificamos a toda la app que ya no hay usuario
     this.usuarioActualSubject.next(null);
     
-    this.router.navigate(['/auth/login']).then(() => {
-      window.location.reload(); 
-    });
+    // 3. Redirigimos al login
+    this.router.navigate(['/auth/login']);
+  }
+
+  // Opcional: dejamos logout como alias por si acaso
+  logout() {
+    this.cerrarSesion();
   }
 
   obtenerUsuarioActual(): Usuario | null {
