@@ -15,7 +15,7 @@ export class ProductsService {
     private readonly httpService: HttpService,
   ) {}
 
-  // --- Métodos CRUD básicos (Requeridos por el Controlador) ---
+  // --- Métodos CRUD básicos 
   create(createProductDto: CreateProductDto) {
     const newProduct = this.productRepository.create(createProductDto);
     return this.productRepository.save(newProduct);
@@ -45,7 +45,7 @@ export class ProductsService {
     return this.productRepository.remove(product);
   }
 
-  // --- Lógica del Reto LiquiVerde (Scanner y Seed) ---
+  // --- Lógica (Scanner y Seed) ---
   async findByBarcode(barcode: string): Promise<Product> {
     let product = await this.productRepository.findOne({ where: { barcode } });
     if (product) return product;
@@ -85,4 +85,24 @@ export class ProductsService {
     await this.productRepository.save(seedProducts);
     return { message: 'Seed completado con éxito', count: seedProducts.length };
   }
+  
+  async getImpactStats() {
+  const products = await this.productRepository.find();
+  const total = products.length;
+  
+  if (total === 0) return { avgEco: 0, sustainableCount: 0, avgSocial: 0, total: 0 };
+
+  const sustainableCount = products.filter(p => p.isSustainable).length;
+  const avgEco = products.reduce((acc, p) => acc + p.environmentalImpact, 0) / total;
+  const avgSocial = products.reduce((acc, p) => acc + (p.socialImpact || 0), 0) / total;
+
+  return {
+    avgEco: Math.round(avgEco),
+    avgSocial: Math.round(avgSocial),
+    sustainableCount,
+    totalProducts: total,
+    // Cálculo de ahorro: diferencia promedio entre productos sostenibles vs resto
+    estimatedSavings: total * 150 // Simulación de ahorro por cada elección verde
+  };
+}
 }

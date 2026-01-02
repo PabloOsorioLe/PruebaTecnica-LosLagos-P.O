@@ -41,4 +41,10 @@ export class ProductsController {
   findOneByBarcode(@Param('barcode') barcode: string) {
     return this.productsService.findByBarcode(barcode);
   }
+  
+  @Get('stats/impact')
+	getStats() {
+     return this.productsService.getImpactStats();
+	}
+
 }

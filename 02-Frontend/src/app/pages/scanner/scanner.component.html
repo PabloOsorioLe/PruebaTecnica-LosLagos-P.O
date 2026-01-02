@@ -1,20 +1,40 @@
 <div class="page-container animate-fade">
     <div class="header-section text-center mb-4">
         <h2 class="text-slate fw-bold">Escáner de Productos</h2>
-        <p class="text-muted">Utilice la cámara para verificar la sostenibilidad</p>
+        <p class="text-muted">Verifique la sostenibilidad mediante cámara o código manual</p>
     </div>
 
-    <div class="card-sobria p-4 text-center shadow-sm">
-        <button *ngIf="!scannerEnabled" class="btn btn-sober btn-lg px-5" (click)="scannerEnabled = true">
-            <i class="bi bi-camera-fill me-2"></i> Iniciar Cámara
-        </button>
+    <div class="card-sobria p-4 shadow-sm">
+        <div *ngIf="!scannerEnabled" class="text-center">
+            <button class="btn btn-sober btn-lg px-5 mb-4 w-100" (click)="scannerEnabled = true">
+                <i class="bi bi-camera-fill me-2"></i> Iniciar Cámara
+            </button>
+
+            <div class="separator mb-4">
+                <span>O TAMBIÉN</span>
+            </div>
+
+            <div class="input-group mb-2">
+                <span class="input-group-text bg-white border-end-0">
+                    <i class="bi bi-upc-scan text-muted"></i>
+                </span>
+                <input type="text" class="form-control border-start-0 ps-0" 
+                       placeholder="Ingrese codigo de barras ej: 7801234567890"
+                       [(ngModel)]="manualCode" 
+                       (keyup.enter)="onManualSearch()">
+                <button class="btn btn-primary px-4" (click)="onManualSearch()" [disabled]="!manualCode">
+                    Buscar
+                </button>
+            </div>
+            <small class="text-muted">Útil para probar productos del inventario local</small>
+        </div>
 
         <div class="scanner-viewport" *ngIf="scannerEnabled">
             <zxing-scanner [formats]="allowedFormats" (scanSuccess)="onCodeResult($event)">
             </zxing-scanner>
 
-            <button class="btn btn-outline-danger mt-3" (click)="scannerEnabled = false">
-                Detener Cámara
+            <button class="btn btn-outline-danger mt-3 w-100" (click)="scannerEnabled = false">
+                <i class="bi bi-x-circle me-2"></i> Detener Cámara
             </button>
         </div>
     </div>

@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 
-// Definimos una interfaz sencilla para la Solicitud
 export interface Solicitud {
   id?: number;
   productName: string;
@@ -30,4 +29,7 @@ export class SolicitudesService {
   crearSolicitud(solicitud: Solicitud): Observable<Solicitud> {
     return this.http.post<Solicitud>(this.apiUrl, solicitud);
   }
+
+
+
 }

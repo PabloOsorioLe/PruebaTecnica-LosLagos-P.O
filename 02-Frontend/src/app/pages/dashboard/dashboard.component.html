@@ -1,0 +1,64 @@
+<div class="page-container animate-fade">
+    <div class="header-section mb-4">
+        <h2 class="text-slate fw-bold">Dashboard de Impacto Sostenible</h2>
+        <p class="text-muted">Resumen analítico del inventario y el ahorro ecológico generado.</p>
+    </div>
+
+    <div *ngIf="cargando" class="text-center py-5">
+        <div class="spinner-border text-primary" role="status"></div>
+        <p class="mt-2 text-muted">Calculando impacto en Azure...</p>
+    </div>
+
+    <div class="row g-4" *ngIf="!cargando">
+        <div class="col-md-4">
+            <div class="card card-impact border-0 shadow-sm p-4 text-center">
+                <div class="icon-circle bg-success-light text-success mb-3">
+                    <i class="bi bi-leaf-fill fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-1">{{ stats?.avgEco }}%</h3>
+                <p class="text-muted small text-uppercase fw-bold m-0">Eco-Score Global</p>
+                <div class="progress mt-3" style="height: 6px;">
+                    <div class="progress-bar bg-success" [style.width.%]="stats?.avgEco"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-impact border-0 shadow-sm p-4 text-center">
+                <div class="icon-circle bg-primary-light text-primary mb-3">
+                    <i class="bi bi-people-fill fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-1">{{ stats?.avgSocial }}%</h3>
+                <p class="text-muted small text-uppercase fw-bold m-0">Impacto Social</p>
+                <div class="progress mt-3" style="height: 6px;">
+                    <div class="progress-bar bg-primary" [style.width.%]="stats?.avgSocial"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card card-impact border-0 shadow-sm p-4 text-center">
+                <div class="icon-circle bg-warning-light text-warning mb-3">
+                    <i class="bi bi-piggy-bank-fill fs-2"></i>
+                </div>
+                <h3 class="fw-bold mb-1">${{ stats?.estimatedSavings | number:'1.0-0' }}</h3>
+                <p class="text-muted small text-uppercase fw-bold m-0">Ahorro Verde Estimado</p>
+                <p class="x-small text-muted mt-2">Basado en {{ stats?.totalProducts }} productos</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm mt-4 p-4 bg-slate-dark text-white card-footer-stats" *ngIf="!cargando">
+        <div class="row align-items-center">
+            <div class="col-8">
+                <h5 class="fw-bold mb-1">Estado del Inventario</h5>
+                <p class="small text-light-gray mb-0">
+                    Actualmente cuentas con <strong>{{ stats?.sustainableCount }}</strong> productos certificados como sostenibles.
+                </p>
+            </div>
+            <div class="col-4 text-end">
+                <i class="bi bi-shield-check display-6 opacity-50"></i>
+            </div>
+        </div>
+    </div>
+</div>

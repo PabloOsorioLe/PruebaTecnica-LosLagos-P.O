@@ -32,3 +32,33 @@
     border-radius: 20px;
     border: 1px solid #e2e8f0;
 }
+
+.separator {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #94a3b8;
+    font-size: 0.75rem;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+}
+
+.separator::before,
+.separator::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.separator:not(:empty)::before { margin-right: .75em; }
+.separator:not(:empty)::after { margin-left: .75em; }
+
+.btn-primary {
+    background-color: #1e293b;
+    border: none;
+}
+
+.form-control:focus {
+    border-color: #cbd5e1;
+    box-shadow: none;
+}
