@@ -35,21 +35,30 @@ onCodeResult(resultString: string) {
     });
   }
 
-  mostrarResultadoExitoso(p: any) {
+ mostrarResultadoExitoso(p: any) {
+    // Definimos el color y el icono según el impacto (Requisito del reto)
+    const isGood = p.environmentalImpact >= 70;
+    const iconColor = isGood ? '#16a34a' : '#dc2626';
+
     Swal.fire({
-      title: p.name,
-      html: `
-        <div class="text-start">
-          <p><strong>Categoría:</strong> ${p.category}</p>
-          <p><strong>Eco-Score:</strong> ${p.environmentalImpact}</p>
-          <p><strong>Sostenible:</strong> ${p.isSustainable ? '✅ Sí' : '❌ No'}</p>
-        </div>
-      `,
-      icon: 'info',
-      confirmButtonText: 'Cerrar',
-      confirmButtonColor: '#1e293b' 
+        title: `<span style="color: #1e293b">${p.name}</span>`,
+        icon: p.isSustainable ? 'success' : 'warning', // Icono cambia según sostenibilidad
+        html: `
+            <div class="text-start" style="font-family: 'Inter', sans-serif;">
+                <p><strong>Categoría:</strong> <span class="badge bg-light text-dark">${p.category}</span></p>
+                <p><strong>Eco-Score:</strong> 
+                    <span style="color: ${iconColor}; font-weight: bold;">${p.environmentalImpact} pts</span>
+                </p>
+                <p><strong>Sostenible:</strong> ${p.isSustainable ? '✅ Producto Sostenible' : '❌ Alto impacto ambiental'}</p>
+            </div>
+        `,
+        confirmButtonText: 'Continuar Escaneando',
+        confirmButtonColor: '#1e293b',
+        showClass: { popup: 'animate__animated animate__fadeInUp' }
+    }).then(() => {
+        this.scannerEnabled = true; // Reactiva la cámara automáticamente
     });
-  }
+}
 
   mostrarAlertaError(mensaje: string) {
     Swal.fire({ title: 'Atención', text: mensaje, icon: 'warning' });

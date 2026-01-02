@@ -1,1 +1,64 @@
-<p>solicitudes works!</p>
+<div class="page-container animate-fade">
+    <div class="inventory-header mb-4">
+        <h2 class="text-slate fw-bold">Gestión de Solicitudes</h2>
+        <p class="text-muted small">Proponga nuevos productos sostenibles para nuestra base de datos.</p>
+    </div>
+
+    <div class="card-solicitud p-4 shadow-sm mb-5">
+        <form (ngSubmit)="enviarSolicitud()" #solicitudForm="ngForm">
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Nombre del Producto</label>
+                    <input type="text" class="form-control" name="productName" 
+                           [(ngModel)]="nuevaSolicitud.productName" required placeholder="Ej: Jabón Ecológico">
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Categoría</label>
+                    <select class="form-select" name="category" [(ngModel)]="nuevaSolicitud.category">
+                        <option value="Lacteos">Lácteos</option>
+                        <option value="Limpieza">Limpieza</option>
+                        <option value="Despensa">Despensa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label fw-bold">Descripción / Justificación</label>
+                <textarea class="form-control" name="description" rows="3" 
+                          [(ngModel)]="nuevaSolicitud.description" required 
+                          placeholder="Explique por qué es un producto sostenible..."></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100" [disabled]="!solicitudForm.valid">
+                <i class="bi bi-send-fill me-2"></i> Registrar Propuesta en Azure
+            </button>
+        </form>
+    </div>
+
+    <div class="card border-0 shadow-sm overflow-hidden" *ngIf="listaSolicitudes.length > 0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0 table-solicitudes">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="ps-4">Producto</th>
+                        <th>Categoría</th>
+                        <th>Estado</th>
+                        <th class="pe-4 text-end">Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let s of listaSolicitudes">
+                        <td class="ps-4 fw-semibold">{{ s.productName }}</td>
+                        <td>{{ s.category }}</td>
+                        <td>
+                            <span class="badge badge-status" [ngClass]="getStatusBadgeClass(s.status)">
+                                {{ s.status || 'pendiente' }}
+                            </span>
+                        </td>
+                        <td class="pe-4 text-end text-muted">{{ s.createdAt | date:'shortDate' }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

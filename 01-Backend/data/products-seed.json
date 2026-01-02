@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Leche Organica",
+    "barcode": "7801234567890",
+    "price": 1200,
+    "category": "Lacteos",
+    "environmentalImpact": 90,
+    "isSustainable": true
+  },
+  {
+    "name": "Detergente Quimico",
+    "barcode": "7809876543210",
+    "price": 3500,
+    "category": "Limpieza",
+    "environmentalImpact": 20,
+    "isSustainable": false
+  },
+  {
+    "name": "Cafe de Comercio Justo",
+    "barcode": "7805556667770",
+    "price": 4500,
+    "category": "Despensa",
+    "environmentalImpact": 85,
+    "isSustainable": true
+  }
+]
