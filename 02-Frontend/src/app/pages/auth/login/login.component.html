@@ -1,54 +1,34 @@
-<div class="login-bg"></div>
-
-<div class="login-center-container" [class.cargando]="cargando">
-  <div class="login-card shadow">
-    <div class="login-header text-center mb-3">
-      <img src="assets/icons/LoginSupplyConnect.png" alt="SupplyConnect" class="login-logo mb-2">
-      <h2 class="mb-0">Ingreso al sistema</h2>
-      <p class="login-subtitle mt-1">Gestión de pedidos para proveedores y clientes</p>
+<div class="login-container">
+  <div class="login-card shadow-sm">
+    <div class="login-header text-center">
+      <div class="login-icon-box">
+        <i class="bi bi-person-vcard-fill"></i>
+      </div>
+      <h2>Prueba Técnica</h2>
+      <h5 class="text-muted mb-4">GrupoLagos</h5>
     </div>
-    <form (ngSubmit)="iniciarSesion()" #loginForm="ngForm" autocomplete="off" novalidate>
-      <div class="mb-3">
-        <label for="usuario" class="form-label">Usuario</label>
-        <input #usuarioInput type="text" id="usuario" name="usuario"
-          class="form-control"
-          required
-          [(ngModel)]="usuario"
-          autocomplete="username"
-          placeholder="Ingrese su usuario"
-          (focus)="scrollToInput($event)">
-      </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Contraseña</label>
-        <div class="input-group password-group">
-          <input [type]="mostrarPassword ? 'text' : 'password'" id="password" name="password"
-            class="form-control password-input"
-            required
-            [(ngModel)]="password"
-            autocomplete="current-password"
-            placeholder="Ingrese su contraseña"
-            (focus)="scrollToInput($event)">
-          <button type="button" class="btn-toggle-pass" (click)="mostrarPassword = !mostrarPassword" tabindex="-1">
-            <i class="bi" [ngClass]="mostrarPassword ? 'bi-eye' : 'bi-eye-slash'"></i>
-          </button>
-        </div>
+
+    <form (ngSubmit)="iniciarSesion()" #loginForm="ngForm" autocomplete="off">
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control shadow-none" id="usuario" name="usuario" 
+               placeholder="Usuario" [(ngModel)]="usuario" required>
+        <label for="usuario">Usuario</label>
       </div>
 
-      <div class="mb-3 text-end">
-        <a href="#" class="small text-decoration-none">¿Olvidaste tu contraseña?</a>
-      </div>
-      <div class="d-grid mb-2">
-        <button type="submit" class="btn btn-login" [disabled]="cargando">
-          Ingresar
+      <div class="form-floating mb-3 position-relative">
+        <input [type]="mostrarPassword ? 'text' : 'password'" class="form-control shadow-none" 
+               id="password" name="password" placeholder="Contraseña" 
+               [(ngModel)]="password" required>
+        <label for="password">Contraseña</label>
+        <button type="button" class="btn-toggle" (click)="mostrarPassword = !mostrarPassword">
+          <i class="bi" [ngClass]="mostrarPassword ? 'bi-eye-fill' : 'bi-eye-slash-fill'"></i>
         </button>
       </div>
-      <div class="text-center">
-        <small class="text-muted">© 2025 SupplyConnect</small>
-      </div>
+
+      <button type="submit" class="btn btn-sober w-100 py-2 mt-2" [disabled]="cargando">
+        <span *ngIf="cargando" class="spinner-border spinner-border-sm me-2"></span>
+        {{ cargando ? 'Autenticando...' : 'Iniciar Sesión' }}
+      </button>
     </form>
   </div>
-</div>
-
-<div class="login-loader" *ngIf="cargando">
-  <img src="assets/icons/LogoSupplyConnectGif.png" alt="Cargando..." class="loader-rotate"/>
 </div>

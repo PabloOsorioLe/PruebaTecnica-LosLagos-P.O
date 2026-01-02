@@ -1,157 +1,93 @@
-import { Component, OnInit, AfterViewInit, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { HttpClient } from '@angular/common/http';
-import { forkJoin, timer } from 'rxjs';
-
 import { AuthService } from '../../../core/services/auth.service';
 import { Usuario } from '../../../core/models/usuario.model';
-import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, AfterViewInit {
-  cargando: boolean = true;
-  cargandoVisible: boolean = true;
+export class LoginComponent implements OnInit {
+  // Propiedades para el formulario
   usuario: string = '';
   password: string = '';
+  cargando: boolean = false;
   mostrarPassword: boolean = false;
-
-  @ViewChild('usuarioInput') usuarioInputRef!: ElementRef<HTMLInputElement>;
 
   constructor(
     private router: Router,
-    private authService: AuthService,
-    private ngZone: NgZone,
-    private http: HttpClient
+    private authService: AuthService
   ) { }
 
   ngOnInit(): void {
-    console.log('LoginComponent - ngOnInit iniciado');
-    
-    forkJoin({
-      timer: timer(1000), 
-      dummy: timer(500) 
-    }).subscribe({
-      next: () => this.finalizarCarga(),
-      error: (err) => {
-        console.warn('LoginComponent - error en carga', err);
-        this.finalizarCarga();
-      }
-    });
-  }
-
-  finalizarCarga() {
-    this.cargando = false;
-    this.cargandoVisible = false;
-    console.log('LoginComponent - Listo para interactuar');
-  }
-
-  ngAfterViewInit(): void {
-    setTimeout(() => {
-      if (this.usuarioInputRef) {
-        this.usuarioInputRef.nativeElement.focus();
-      }
-    }, 300);
+    // Si ya hay un token, redirigir directo a solicitudes
+    if (sessionStorage.getItem('token')) {
+      this.router.navigate(['/solicitudes']);
+    }
   }
 
   iniciarSesion(): void {
-    console.log('Intentando login...');
-
     if (!this.usuario || !this.password) {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Campos requeridos',
-        text: 'Por favor, ingrese usuario y contraseña.'
+      Swal.fire({ 
+        icon: 'warning', 
+        title: 'Campos incompletos', 
+        text: 'Por favor, ingrese sus credenciales.',
+        confirmButtonColor: '#1e293b'
       });
       return;
     }
 
     this.cargando = true;
-    this.cargandoVisible = true;
 
-    const url = `${environment.apiUrl}/auth/login`;
-    const payload = { rut: this.usuario, password: this.password };
-
-    // --- BLOQUE DE PRUEBA (Descomentar si no hay backend) ---
-    /*
+    // Simulación de validación para prueba técnica (1 y 1)
     setTimeout(() => {
-       const userFake: Usuario = { id: 1, nombre: this.usuario, correo: 'test@test.com', rol: 'Admin' };
-       this.procesarLoginExitoso({ token: 'fake-token', ...userFake });
-    }, 1500);
-    return;
-    */
-    // --------------------------------------------------------
-
-    this.http.post<any>(url, payload).subscribe({
-      next: (res) => this.procesarLoginExitoso(res),
-      error: (err) => this.onLoginError(err)
-    });
+      if (this.usuario === '1' && this.password === '1') {
+        this.ejecutarLoginExitoso();
+      } else {
+        this.ejecutarLoginError();
+      }
+    }, 1200);
   }
 
-  procesarLoginExitoso(res: any) {
-    console.log('Login exitoso:', res);
-    sessionStorage.setItem('token', res.token);
-
-    const usuarioLogueado: Usuario = {
-      id: res.id || 1, 
-      nombre: res.nombre || this.usuario,
-      correo: res.correo || 'correo@ejemplo.com',
-      rol: res.rol || 'Admin'
+  private ejecutarLoginExitoso() {
+    // Datos simulados del usuario para el servicio
+    const userFake: Usuario = { 
+      id: 1, 
+      nombre: 'Admin Prueba', 
+      correo: 'admin@grupolagos.cl', 
+      rol: 'Admin' 
     };
 
-    this.authService.iniciarSesion(usuarioLogueado);
-    this.onLoginSuccess();
-  }
+    // Guardar estado en el servicio y token en el navegador
+    this.authService.iniciarSesion(userFake);
+    sessionStorage.setItem('token', 'fake-jwt-token-grupolagos-12345');
 
-  private onLoginSuccess(): void {
-    this.fadeOut(() => {
-      Swal.fire({
-        icon: 'success',
-        title: 'Bienvenido/a',
-        showConfirmButton: false,
-        timer: 1500,
-        background: 'rgba(24, 24, 24, 0.85)',
-        color: '#99caff',
-        iconColor: '#28a745'
-      }).then(() => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/solicitudes']);
-        });
-      });
+    this.cargando = false;
+
+    Swal.fire({
+      icon: 'success',
+      title: '¡Acceso Correcto!',
+      text: 'Bienvenido al sistema de GrupoLagos',
+      timer: 1500,
+      showConfirmButton: false
+    }).then(() => {
+      // Redirigir a la página principal
+      this.router.navigate(['/solicitudes']);
     });
   }
 
-  private onLoginError(err: any): void {
-    console.error('Error login:', err);
-    this.fadeOut(() => {
-      let mensaje = 'Problemas con el servidor.';
-      if (err.status === 401) mensaje = 'Credenciales incorrectas.';
-      
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: mensaje,
-        background: 'rgba(30, 10, 10, 0.85)',
-        color: '#ff9999'
-      });
+  private ejecutarLoginError() {
+    this.cargando = false;
+    Swal.fire({
+      icon: 'error',
+      title: 'Error de autenticación',
+      text: 'Usuario o contraseña inválidos. (Use credenciales de prueba 1 / 1)',
+      confirmButtonColor: '#1e293b'
     });
   }
-
-  fadeOut(callback: () => void) {
-    this.cargandoVisible = false;
-    setTimeout(() => {
-      this.cargando = false;
-      callback();
-    }, 500);
-  }
-
-  // --- CORRECCIÓN: Agregamos el método que faltaba ---
-  scrollToInput(event: any): void {
-    const target = event.target as HTMLElement;
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
+  
+   
+  
 }

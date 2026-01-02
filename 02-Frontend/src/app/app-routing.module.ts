@@ -1,59 +1,40 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-// Guard de seguridad (en core)
+// 1. IMPORTACIONES FALTANTES (Esto es lo que quita el error)
 import { AuthGuard } from './core/guards/auth.guard';
+import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component';
+import { ScannerComponent } from './pages/scanner/scanner.component';
+import { ProductosComponent } from './pages/productos/productos.component';
 
 const routes: Routes = [
-  // Redirección inicial
-  { path: '', redirectTo: '/solicitudes', pathMatch: 'full' },
+  // Redirección inicial: directo al login
+  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
 
-  // MANTENEDOR DE PRODUCTOS (standalone + lazy)
-  {
-    path: 'productos',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./pages/mantenedor-productos/mantenedor-productos.component')
-        .then(m => m.MantenedorProductosComponent)
+  { 
+    path: 'solicitudes', 
+    component: SolicitudesComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'scanner', 
+    component: ScannerComponent, 
+    canActivate: [AuthGuard] 
+  },
+  { 
+    path: 'productos', 
+    component: ProductosComponent, 
+    canActivate: [AuthGuard] 
   },
 
-  // --- NUEVA RUTA AGREGADA: PROVEEDORES ---
-  {
-    path: 'proveedores',
-    canActivate: [AuthGuard],
-    loadComponent: () => 
-      import('./pages/proveedores/proveedores.component')
-        .then(m => m.ProveedoresComponent)
-  },
-  // ----------------------------------------
-
-  // Listado de Solicitudes (Lazy Loading standalone)
-  {
-    path: 'solicitudes',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./pages/solicitudes/lista-solicitudes/lista-solicitudes.component')
-        .then(m => m.ListaSolicitudesComponent)
+  // Módulo de Autenticación con Lazy Loading
+  { 
+    path: 'auth', 
+    loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) 
   },
 
-  // Nueva Solicitud (Lazy Loading standalone)
-  {
-    path: 'solicitudes/nueva',
-    canActivate: [AuthGuard],
-    loadComponent: () =>
-      import('./pages/solicitudes/nueva-solicitud/nueva-solicitud.component')
-        .then(m => m.NuevaSolicitudComponent)
-  },
-
-  // Módulo de Autenticación (Login/Registro)
-  {
-    path: 'auth',
-    loadChildren: () =>
-      import('./pages/auth/auth.module').then(m => m.AuthModule)
-  },
-
-  // Ruta comodín (404) - Siempre al final
-  { path: '**', redirectTo: '/solicitudes' }
+  // Ruta comodín: si la ruta no existe, vuelve al login o a solicitudes
+  { path: '**', redirectTo: '/auth/login' }
 ];
 
 @NgModule({
