@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://inventorycloud-5ik9.onrender.com/api'
+  apiUrl: 'https://pruebatecnica-loslagos-p-o.onrender.com/api'
 };
