@@ -31,4 +31,14 @@ export class ProductsController {
   remove(@Param('id') id: string) {
     return this.productsService.remove(+id);
   }
+  
+  @Post('seed')
+  seed() {
+    return this.productsService.seedDatabase();
+  }
+
+  @Get('scanner/:barcode')
+  findOneByBarcode(@Param('barcode') barcode: string) {
+    return this.productsService.findByBarcode(barcode);
+  }
 }
