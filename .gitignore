@@ -1,0 +1,85 @@
+#########################
+# Visual Studio & .NET  #
+#########################
+
+# Carpetas de VS
+.vs/
+
+# Archivos de usuario / solución
+**/*.suo
+**/*.user
+**/*.userosscache
+**/*.sln.docstates
+
+# Archivos de build y depuración
+**/*.db
+**/*.pdb
+**/*.dll
+**/*.exe
+**/*.cache
+**/*.log
+**/*.vspscc
+**/*.vssscc
+
+# Carpetas de compilación
+bin/
+obj/
+TestResults/
+
+# Bases de datos locales de VS / Roslyn
+*.CodeChunks.db
+*.SemanticSymbols.db
+
+#########################
+# Copilot / Editor      #
+#########################
+
+.vscode/
+.vscode-test/
+*.code-workspace
+.idea/
+
+#########################
+# Node / Angular        #
+#########################
+
+node_modules/
+dist/
+build/
+coverage/
+.tmp/
+
+npm-debug.log*
+yarn-error.log
+pnpm-lock.yaml
+
+#########################
+# Package managers      #
+#########################
+
+package-lock.json
+yarn.lock
+
+#########################
+# Archivos temporales   #
+#########################
+
+*.DS_Store
+*.swp
+*.bak
+*.orig
+*.lock
+*.tmp
+*.tgz
+
+#########################
+# Angular env / secrets #
+#########################
+
+# Ignorar overrides de environment (ajusta si necesitas commitear alguno)
+src/environments/environment*.ts
+
+# Configs sensibles
+secrets.json
+.env
+.env.*

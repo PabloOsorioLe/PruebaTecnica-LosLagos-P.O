@@ -1,0 +1,7 @@
+<!-- Navbar sólo cuando hay sesión -->
+<app-navbar *ngIf="mostrarLayout"></app-navbar>
+
+<!-- Contenido principal de la aplicación -->
+<div [class.main-content]="mostrarLayout">
+  <router-outlet></router-outlet>
+</div>

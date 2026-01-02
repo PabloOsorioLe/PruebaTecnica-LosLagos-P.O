@@ -1,0 +1,11 @@
+/* Esta clase se activa solo cuando estás logueado */
+.main-content {
+  padding-top: 80px; /* Ajusta este valor si tu navbar es más alto o más bajo */
+  min-height: 100vh; /* Asegura que cubra toda la pantalla */
+  background-color: #f8f9fa; /* Un color de fondo gris muy suave para toda la app (opcional) */
+}
+
+/* Opcional: Para que las transiciones de páginas sean suaves */
+.main-content {
+  transition: padding-top 0.3s ease;
+}
