@@ -1,0 +1,36 @@
+@media (max-width: 768px) {
+  html, body {
+    padding-top: 0 !important;
+    overflow-y: auto !important;
+  }
+
+  /* Botón fijo que queda bajo el navbar */
+  .boton-nuevo-fijo {
+    position: fixed;
+    top: 64px; /* Altura estimada del navbar */
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    padding: 6px 0;
+    z-index: 1040;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ddd;
+    transition: top 0.3s ease;
+  }
+
+  /* Oculta el botón si el menú lateral está abierto */
+  body.menu-abierto .boton-nuevo-fijo {
+    display: none;
+  }
+
+  /* Ajusta el margen para que el contenido no quede detrás del botón fijo */
+  .productos-wrapper {
+    margin-top: 112px !important; /* 64 navbar + 48 botón */
+  }
+
+  /* Asegura que las cards no pasen por detrás del botón */
+  .contenido-mobile {
+    padding-top: 0; /* o aumenta si necesitas más separación */
+  }
+}
