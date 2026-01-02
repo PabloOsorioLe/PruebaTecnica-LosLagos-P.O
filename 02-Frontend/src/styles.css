@@ -9,6 +9,9 @@
   --nav-height: 52px;
 }
 
+/* ==========================================================================
+   RESETEO Y BASES
+   ========================================================================== */
 html, body {
   margin: 0 !important;
   padding: 0 !important;
@@ -22,21 +25,53 @@ html, body {
    ESTRUCTURA PRINCIPAL (app.component.html)
    ========================================================================== */
 .main-content {
-  /* SOLUCIÓN: Cambiamos padding-top de 52px a 0 para eliminar el hueco doble */
+  /* Elimina el hueco doble entre el navbar y el contenido */
   padding-top: 0 !important; 
   min-height: calc(100vh - var(--nav-height));
   display: block;
   box-sizing: border-box;
 }
 
+/* ==========================================================================
+   CONTENEDOR GLOBAL DE MÓDULOS (Solución de márgenes)
+   ========================================================================== */
+.page-container {
+  /* 1. Margen lateral para que el contenido no toque los bordes */
+  padding-left: 1rem;
+  padding-right: 1rem;
+  
+  /* 2. Centrado y límite de ancho para monitores ultra-wide */
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1300px; 
+  
+  /* 3. Espaciado vertical respecto al Navbar y al fondo de página */
+  padding-top: 1.5rem;
+  padding-bottom: 2rem;
+  
+  /* Reset de posibles márgenes externos que causen conflicto */
+  margin-top: 0 !important; 
+}
+
+/* Ajuste de márgenes para Tablets y Escritorio */
+@media (min-width: 768px) {
+  .page-container {
+    padding-left: 2.5rem;
+    padding-right: 2.5rem;
+    padding-top: 2rem;
+  }
+}
+
+/* ==========================================================================
+   COMPATIBILIDAD DE WRAPPERS LEGACY
+   ========================================================================== */
 .productos-wrapper, 
-.page-container,
 .contenido-mobile {
   margin-top: 0 !important; 
 }
 
 /* ==========================================================================
-   ESTILOS GLOBALES
+   ESTILOS GLOBALES Y ANIMACIONES
    ========================================================================== */
 .animate-fade {
   animation: fadeIn 0.4s ease-out;
@@ -45,4 +80,9 @@ html, body {
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(5px); }
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Utilidad para forzar redondeado en banners de pie */
+.card-footer-stats {
+  border-radius: 16px !important;
 }

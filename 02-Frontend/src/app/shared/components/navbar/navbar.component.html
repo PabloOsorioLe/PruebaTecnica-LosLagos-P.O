@@ -12,6 +12,12 @@
 
     <div class="nav-content" [class.show]="menuAbierto">
       <ul class="nav-links">
+
+        <li>
+          <a routerLink="/dashboard" routerLinkActive="active" (click)="menuAbierto = false">
+            <i class="bi bi-speedometer2"></i> Dashboard
+          </a>
+        </li>
         <li>
           <a routerLink="/solicitudes" routerLinkActive="active" (click)="menuAbierto = false">
             <i class="bi bi-clipboard-check"></i> Solicitudes

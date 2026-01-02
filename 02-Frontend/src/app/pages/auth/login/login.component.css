@@ -1,9 +1,10 @@
 .login-container {
   min-height: 100vh;
   display: flex;
-  align-items: center;
+  align-items: flex-start; 
   justify-content: center;
-  background-color: #f1f5f9; /* Gris azulado muy claro */
+  background-color: #f1f5f9;
+  padding-top: 15vh; 
 }
 
 .login-card {

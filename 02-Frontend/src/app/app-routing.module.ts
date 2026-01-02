@@ -6,11 +6,17 @@ import { AuthGuard } from './core/guards/auth.guard';
 import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component';
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { ProductosComponent } from './pages/productos/productos.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 const routes: Routes = [
   // Redirección inicial: directo al login
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
 
+  { 
+    path: 'dashboard', 
+    component: DashboardComponent, 
+    canActivate: [AuthGuard] 
+  },
   { 
     path: 'solicitudes', 
     component: SolicitudesComponent, 

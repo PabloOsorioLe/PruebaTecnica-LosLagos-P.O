@@ -19,4 +19,7 @@ export class ProductService {
   scanBarcode(barcode: string): Observable<Product> {
     return this.http.get<Product>(`${this.apiUrl}/scanner/${barcode}`);
   }
+    getImpactStats(): Observable<any> {
+  return this.http.get(`${this.apiUrl}/stats/impact`);
+  }
 }

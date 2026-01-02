@@ -58,3 +58,15 @@ Este proyecto contó con la asistencia de Gemini para:
 Arquitectura de Datos: Diseño y normalización de las tablas products y solicitudes en Azure PostgreSQL.
 Refactorización UI: Implementación de un diseño responsivo Mobile-First que transforma tablas de datos en tarjetas interactivas para una mejor experiencia en teléfonos móviles.
 Troubleshooting: Resolución de errores de compilación de TypeScript y configuración de CORS para la comunicación entre Vercel y Render.
+
+
+## Logica de Calculo y Formulas del Dashboard
+El Dashboard de Impacto Sostenible realiza un procesamiento de datos agregados en tiempo real desde la base de datos de Azure:
+1. Eco-Score GlobalRepresenta el promedio del desempeño ecológico de todo el inventario registrado.Fórmula: : $90+20+85+50+50+21 = 316$. Dividido por $6$ productos, 
+resulta en un 52.6% (Redondeado a 53% en interfaz).
+
+2. Indice de Impacto Social Mide el compromiso social promedio (comercio justo y apoyo local) de los productos.Fórmula:  $85+40+95+70+70+70 = 430$. Dividido por $6$ productos, 
+resulta en un 71.6% (Redondeado a 72% en interfaz).
+
+3. Ahorro Verde EstimadoProyección económica basada en la preferencia por productos con impacto positivo en lugar de alternativas convencionales.
+Se asigna un factor de ahorro simbólico de $150 por cada producto analizado y registrado, incentivando el crecimiento de la base de datos sostenible.Cálculo Actual: $6 por $150 = $900.

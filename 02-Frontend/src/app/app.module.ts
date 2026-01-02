@@ -32,6 +32,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 // Otros
 import { FlatpickrModule } from 'angularx-flatpickr';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component';
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { ProductosComponent } from './pages/productos/productos.component';
@@ -43,8 +44,6 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     SolicitudesComponent,
     ScannerComponent,
     ProductosComponent
-    // NO declarar aquí componentes standalone
-    // NO declarar MantenedorProductosComponent
   ],
   imports: [
     // 1. Componentes standalone
@@ -84,6 +83,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 
      // 7. Libreria scaner
     ZXingScannerModule,
+    DashboardModule,
  
   ],
   providers: [
