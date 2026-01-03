@@ -25,8 +25,7 @@ html, body {
    ESTRUCTURA PRINCIPAL (app.component.html)
    ========================================================================== */
 .main-content {
-  /* Elimina el hueco doble entre el navbar y el contenido */
-  padding-top: 0 !important; 
+  padding-top: var(--nav-height) !important; 
   min-height: calc(100vh - var(--nav-height));
   display: block;
   box-sizing: border-box;
@@ -85,4 +84,16 @@ html, body {
 /* Utilidad para forzar redondeado en banners de pie */
 .card-footer-stats {
   border-radius: 16px !important;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    /* Añadimos un pequeño margen extra en móvil por seguridad */
+    padding-top: calc(var(--nav-height) + 10px) !important;
+  }
+  
+  .page-container {
+    /* Reducimos el padding superior del contenedor interno para no dejar tanto hueco */
+    padding-top: 1rem; 
+  }
 }
