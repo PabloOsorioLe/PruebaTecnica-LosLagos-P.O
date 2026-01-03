@@ -99,12 +99,12 @@ onCodeResult(resultString: string) {
         showClass: { popup: 'animate__animated animate__fadeInUp' }
     }).then((result) => {
         // Solo reactiva la cámara si el usuario hizo clic en "Continuar Escaneando"
-        if (result.isConfirmed) {
-            this.scannerEnabled = true;
-        } else {
-            // Si hace clic en "Cerrar", la cámara se mantiene apagada
-            this.scannerEnabled = false;
-        }
+       if (result.isConfirmed) {
+    this.scannerEnabled = true;
+} else if (result.dismiss === Swal.DismissReason.cancel) {
+    // Si cancela o cierra (o podemos agregar un botón específico)
+    this.agregarALista(p);
+}
     });
 }
 
@@ -116,4 +116,27 @@ onCodeResult(resultString: string) {
     const device = this.availableDevices.find(d => d.deviceId === selectedId);
     this.currentDevice = device;
 }
+
+agregarALista(producto: any) {
+  // Obtenemos la lista actual o creamos una nueva
+  let lista = JSON.parse(localStorage.getItem('mi_lista') || '[]');
+  
+  // Evitar duplicados
+  const existe = lista.find((p: any) => p.barcode === producto.barcode);
+  if (!existe) {
+    lista.push(producto);
+    localStorage.setItem('mi_lista', JSON.stringify(lista));
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Añadido',
+      text: `${producto.name} se agregó a tu lista de compras.`,
+      timer: 1500,
+      showConfirmButton: false
+    });
+  } else {
+    Swal.fire('Atención', 'Este producto ya está en tu lista.', 'info');
+  }
+}
+
 }

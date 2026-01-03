@@ -37,6 +37,7 @@ import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component'
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { ShoppingListModule } from './pages/shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
@@ -84,6 +85,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
      // 7. Libreria scaner
     ZXingScannerModule,
     DashboardModule,
+    ShoppingListModule
  
   ],
   providers: [

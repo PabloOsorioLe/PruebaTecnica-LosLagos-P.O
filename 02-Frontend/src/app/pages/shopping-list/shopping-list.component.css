@@ -1,0 +1,62 @@
+.border-start-danger { border-left: 5px solid #dc3545 !important; }
+.border-start-success { border-left: 5px solid #198754 !important; }
+
+.border-dashed {
+    border: 1px dashed #198754;
+}
+
+.x-small {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.card {
+    transition: transform 0.2s;
+}
+
+.card:active {
+    transform: scale(0.98);
+}
+
+/* Estilo circular para el Eco-Score */
+.score-circle {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 0.85rem;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Colores de fondo por nivel de impacto */
+.bg-eco-high { background-color: #198754; }   /* Verde (Sostenible) */
+.bg-eco-medium { background-color: #ffc107; color: #212529; } /* Amarillo (Medio) */
+.bg-eco-low { background-color: #dc3545; }    /* Rojo (Alto impacto) */
+
+/* Forzar el color de fondo oscuro para el resumen */
+.bg-slate-dark {
+    background-color: #1e293b !important;
+    color: white !important;
+}
+
+.text-light-gray {
+    color: #cbd5e1 !important;
+}
+
+/* Ajuste para que el total resalte en verde sobre el fondo oscuro */
+.text-success-light {
+    color: #4ade80 !important;
+    font-weight: bold;
+}
+
+.text-danger-light { color: #fca5a5; }
+.border-bottom-danger { border-bottom: 6px solid #dc3545 !important; }
+
+/* Animación para que la alerta de presupuesto llame la atención */
+.animate-fade {
+    animation: fadeIn 0.3s ease-in;
+}

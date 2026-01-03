@@ -7,6 +7,7 @@ import { SolicitudesComponent } from './pages/solicitudes/solicitudes.component'
 import { ScannerComponent } from './pages/scanner/scanner.component';
 import { ProductosComponent } from './pages/productos/productos.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { ShoppingListComponent } from './pages/shopping-list/shopping-list.component';
 
 const routes: Routes = [
   // Redirección inicial: directo al login
@@ -33,11 +34,18 @@ const routes: Routes = [
     canActivate: [AuthGuard] 
   },
 
+  { 
+    path: 'shopping-list', 
+    component: ShoppingListComponent, 
+    canActivate: [AuthGuard] 
+  },
+
   // Módulo de Autenticación con Lazy Loading
   { 
     path: 'auth', 
     loadChildren: () => import('./pages/auth/auth.module').then(m => m.AuthModule) 
   },
+  
 
   // Ruta comodín: si la ruta no existe, vuelve al login o a solicitudes
   { path: '**', redirectTo: '/auth/login' }
