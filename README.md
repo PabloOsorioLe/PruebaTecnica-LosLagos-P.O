@@ -17,11 +17,37 @@ Es una Aplicación Web Progresiva (PWA) diseñada para la evaluación técnica d
 4. Acceder a: http://localhost:4200
 
 ## Despliegue e Infraestructura
-La aplicación utiliza una arquitectura distribuida para garantizar alta disponibilidad:
+La aplicacion utiliza una arquitectura distribuida para garantizar alta disponibilidad:
 * Frontend: Desplegado en Vercel.
 * Backend: Desplegado en Render.
 * Base de Datos: Instancia de PostgreSQL en Azure (Flexible Server).
 * Mantenimiento: Cron-job externo para evitar el estado de inactividad (cold start) del servidor gratuito de Render.
+
+*Diagrama Mermaid.js:
+graph TD
+    subgraph "Capa de Cliente (Frontend)"
+        A[Usuario / Navegador] -->|Interactúa| B[Angular PWA - Vercel]
+        B -->|Caché de Datos| C[(Service Worker / LocalStorage)]
+    end
+
+    subgraph "Capa de Servidor (Backend)"
+        B -->|Peticiones HTTPS / REST| D[NestJS API - Render]
+        D -->|ORM / Consultas SQL| E[(PostgreSQL - Azure)]
+    end
+
+    subgraph "Servicios Externos"
+        D -->|Búsqueda Fallback| F[Open Food Facts API]
+    end
+
+    %% Estilos estéticos
+    style B fill:#dd0031,color:#fff,stroke:#333
+    style D fill:#e0234e,color:#fff,stroke:#333
+    style E fill:#0078d4,color:#fff,stroke:#333
+    style F fill:#ff9900,color:#fff,stroke:#333
+	
+	
+	
+	
 
 ## Variables de Entorno
 ### Backend (.env)
@@ -85,3 +111,14 @@ Para cumplir con el requerimiento de innovación y acceso en movilidad, la plata
 * Modo Offline: Gracias a los Service Workers, el inventario y la lista de compras son accesibles sin conexion a internet.
 * Instalabilidad: Puede añadirse a la pantalla de inicio en dispositivos iOS y Android como una aplicacion nativa.
 * Persistencia: Utiliza localStorage y caché de datos para garantizar que la lista optimizada del usuario no se pierda al cerrar el navegador.
+
+## Pruebas Automaticas
+El proyecto cuenta con una suite de pruebas unitarias para garantizar la integridad de los algoritmos críticos (Busqueda Hibrida y Logica de Negocio).
+
+**Ejecutar tests del Backend:**
+1. cd 01-Backend
+2. npm run test
+
+**Cobertura principal:**
+* ProductsService: Validacion de Plan A (DB), Plan B (API External) y manejo de excepciones.
+* ProductsController: Validacion de endpoints y flujos de datos.
