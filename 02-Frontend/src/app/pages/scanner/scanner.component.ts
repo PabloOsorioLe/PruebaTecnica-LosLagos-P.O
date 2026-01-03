@@ -24,21 +24,26 @@ export class ScannerComponent {
 
   constructor(private productService: ProductService) {}
 
-  onCamerasFound(devices: MediaDeviceInfo[]) {
-    this.availableDevices = devices;
-    
-    // Intentamos seleccionar automáticamente la cámara trasera principal
-    // Buscamos dispositivos que tengan 'back' o 'trasera' en su nombre
-    const backCamera = devices.find(device => 
-      device.label.toLowerCase().includes('back') || 
-      device.label.toLowerCase().includes('trasera') ||
-      device.label.toLowerCase().includes('environment')
-    );
+onCamerasFound(devices: MediaDeviceInfo[]) {
+  this.availableDevices = devices;
+  
+  // 1. Usamos FILTER para obtener una lista de todas las cámaras traseras
+  const backCameras = devices.filter(device => 
+    device.label.toLowerCase().includes('back') || 
+    device.label.toLowerCase().includes('trasera') ||
+    device.label.toLowerCase().includes('environment')
+  );
 
-    // Si encontramos una cámara trasera específica, la seleccionamos
-    // Si no, usamos la última de la lista (suele ser la trasera en la mayoría de Android)
-    this.currentDevice = backCamera || devices[devices.length - 1];
-  }
+  // 2. De esa lista, buscamos la principal (la que no diga 'wide' o 'gran angular')
+  // Si no hay ninguna que cumpla, tomamos la última del arreglo de traseras
+  const mainCamera = backCameras.find(d => 
+    !d.label.toLowerCase().includes('wide') && 
+    !d.label.toLowerCase().includes('ultra')
+  ) || backCameras[backCameras.length - 1];
+
+  // 3. Asignamos la cámara encontrada o la primera disponible por defecto
+  this.currentDevice = mainCamera || devices[0];
+}
 
   onManualSearch() {
     if (!this.manualCode) return;
