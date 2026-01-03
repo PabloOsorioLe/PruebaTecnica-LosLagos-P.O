@@ -17,13 +17,13 @@ Es una Aplicación Web Progresiva (PWA) diseñada para la evaluación técnica d
 4. Acceder a: http://localhost:4200
 
 ## Despliegue e Infraestructura
-La aplicacion utiliza una arquitectura distribuida para garantizar alta disponibilidad:
-* Frontend: Desplegado en Vercel.
-* Backend: Desplegado en Render.
-* Base de Datos: Instancia de PostgreSQL en Azure (Flexible Server).
-* Mantenimiento: Cron-job externo para evitar el estado de inactividad (cold start) del servidor gratuito de Render.
+La aplicación utiliza una arquitectura distribuida para garantizar alta disponibilidad:
+* **Frontend:** Desplegado en Vercel.
+* **Backend:** Desplegado en Render.
+* **Base de Datos:** Instancia de PostgreSQL en Azure (Flexible Server).
+* **Mantenimiento:** Cron-job externo para evitar el estado de inactividad (cold start) del servidor gratuito de Render.
 
-*Diagrama Mermaid.js:
+```mermaid
 graph TD
     subgraph "Capa de Cliente (Frontend)"
         A[Usuario / Navegador] -->|Interactúa| B[Angular PWA - Vercel]
@@ -43,12 +43,9 @@ graph TD
     style B fill:#dd0031,color:#fff,stroke:#333
     style D fill:#e0234e,color:#fff,stroke:#333
     style E fill:#0078d4,color:#fff,stroke:#333
-    style F fill:#ff9900,color:#fff,stroke:#333
+    style F fill:#ff9900,color:#fff,stroke:#333```
 	
 	
-	
-	
-
 ## Variables de Entorno
 ### Backend (.env)
 * DB_HOST: Host de la base de datos Azure.
@@ -122,3 +119,7 @@ El proyecto cuenta con una suite de pruebas unitarias para garantizar la integri
 **Cobertura principal:**
 * ProductsService: Validacion de Plan A (DB), Plan B (API External) y manejo de excepciones.
 * ProductsController: Validacion de endpoints y flujos de datos.
+
+## Demo en Vivo (Frontend): https://prueba-tecnica-los-lagos-p-o.vercel.app
+
+## Repositorio (Código): https://github.com/PabloOsorioLe/PruebaTecnica-LosLagos-P.O
