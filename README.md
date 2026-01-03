@@ -43,8 +43,8 @@ graph TD
     style B fill:#dd0031,color:#fff,stroke:#333
     style D fill:#e0234e,color:#fff,stroke:#333
     style E fill:#0078d4,color:#fff,stroke:#333
-    style F fill:#ff9900,color:#fff,stroke:#333```
-	
+    style F fill:#ff9900,color:#fff,stroke:#333
+```	
 	
 ## Variables de Entorno
 ### Backend (.env)
