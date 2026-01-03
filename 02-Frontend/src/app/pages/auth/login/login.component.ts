@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     // Si ya hay un token, redirigir directo a solicitudes
     if (sessionStorage.getItem('token')) {
-      this.router.navigate(['/solicitudes']);
+      this.router.navigate(['/dashboard']);
     }
   }
 
@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
       showConfirmButton: false
     }).then(() => {
       // Redirigir a la página principal
-      this.router.navigate(['/solicitudes']);
+      this.router.navigate(['/dashboard']);
     });
   }
 

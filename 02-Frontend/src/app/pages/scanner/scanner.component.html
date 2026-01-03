@@ -29,13 +29,26 @@
             <small class="text-muted">Útil para probar productos del inventario local</small>
         </div>
 
-        <div class="scanner-viewport" *ngIf="scannerEnabled">
-            <zxing-scanner [formats]="allowedFormats" (scanSuccess)="onCodeResult($event)">
-            </zxing-scanner>
+<div class="scanner-viewport" *ngIf="scannerEnabled">
+    <zxing-scanner 
+        [formats]="allowedFormats" 
+        [device]="currentDevice"
+        (camerasFound)="onCamerasFound($event)"
+        (scanSuccess)="onCodeResult($event)">
+    </zxing-scanner>
 
-            <button class="btn btn-outline-danger mt-3 w-100" (click)="scannerEnabled = false">
-                <i class="bi bi-x-circle me-2"></i> Detener Cámara
-            </button>
-        </div>
+    <div *ngIf="availableDevices.length > 1" class="mt-2">
+        <select class="form-select form-select-sm" (change)="onDeviceSelectChange($event)">
+            <option value="">Seleccionar otra cámara</option>
+            <option *ngFor="let device of availableDevices" [value]="device.deviceId">
+                {{ device.label || 'Cámara ' + device.deviceId }}
+            </option>
+        </select>
+    </div>
+
+    <button class="btn btn-outline-danger mt-3 w-100" (click)="scannerEnabled = false">
+        <i class="bi bi-x-circle me-2"></i> Detener Cámara
+    </button>
+</div>
     </div>
 </div>

@@ -12,6 +12,9 @@ export class ScannerComponent {
   scannerEnabled: boolean = false;
   manualCode: string = '';
 
+  availableDevices: MediaDeviceInfo[] = [];
+  currentDevice: MediaDeviceInfo | undefined = undefined;
+
   allowedFormats = [ 
     BarcodeFormat.EAN_13, 
     BarcodeFormat.CODE_128, 
@@ -20,6 +23,22 @@ export class ScannerComponent {
   
 
   constructor(private productService: ProductService) {}
+
+  onCamerasFound(devices: MediaDeviceInfo[]) {
+    this.availableDevices = devices;
+    
+    // Intentamos seleccionar automáticamente la cámara trasera principal
+    // Buscamos dispositivos que tengan 'back' o 'trasera' en su nombre
+    const backCamera = devices.find(device => 
+      device.label.toLowerCase().includes('back') || 
+      device.label.toLowerCase().includes('trasera') ||
+      device.label.toLowerCase().includes('environment')
+    );
+
+    // Si encontramos una cámara trasera específica, la seleccionamos
+    // Si no, usamos la última de la lista (suele ser la trasera en la mayoría de Android)
+    this.currentDevice = backCamera || devices[devices.length - 1];
+  }
 
   onManualSearch() {
     if (!this.manualCode) return;
@@ -87,4 +106,9 @@ onCodeResult(resultString: string) {
   mostrarAlertaError(mensaje: string) {
     Swal.fire({ title: 'Atención', text: mensaje, icon: 'warning' });
   }
+  onDeviceSelectChange(event: any) {
+    const selectedId = event.target.value;
+    const device = this.availableDevices.find(d => d.deviceId === selectedId);
+    this.currentDevice = device;
+}
 }
