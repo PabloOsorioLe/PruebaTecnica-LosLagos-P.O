@@ -120,6 +120,12 @@ El proyecto cuenta con una suite de pruebas unitarias para garantizar la integri
 * ProductsService: Validacion de Plan A (DB), Plan B (API External) y manejo de excepciones.
 * ProductsController: Validacion de endpoints y flujos de datos.
 
+## Acceso a la Plataforma
+Para la revision de la evaluacion tecnica, se han configurado las siguientes credenciales de acceso rapido (hardcoded):
+
+Usuario: 1  
+Contraseña:1
+
 ## Demo en Vivo (Frontend): https://prueba-tecnica-los-lagos-p-o.vercel.app
 
 ## Repositorio (Código): https://github.com/PabloOsorioLe/PruebaTecnica-LosLagos-P.O
